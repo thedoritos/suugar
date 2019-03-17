@@ -1,3 +1,13 @@
 import UIKit
+import PlaygroundSupport
 
-var str = "Hello, playground"
+class SuugarViewController: UIViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = UIColor.white
+        title = "Suugar"
+    }
+}
+
+let navC = UINavigationController(rootViewController: SuugarViewController())
+PlaygroundPage.current.liveView = navC
