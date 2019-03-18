@@ -16,6 +16,7 @@ class SuugarViewController: UIViewController, UITableViewDataSource {
         ui {
             $0.backgroundColor = UIColor.white
             table = $0.table {
+                $0.matchParent()
                 $0.estimatedRowHeight = UITableView.automaticDimension
                 $0.register(AppTableViewCell.self, forCellReuseIdentifier: "cell")
                 $0.dataSource = self
@@ -53,6 +54,25 @@ extension UIView {
         addSubview(table)
         block(table)
         return table
+    }
+
+    func matchParentWidth(margins: CGFloat = 0) {
+        guard let parent = superview else { return }
+        leadingAnchor.constraint(equalTo: parent.leadingAnchor, constant: margins).isActive = true
+        parent.trailingAnchor.constraint(equalTo: trailingAnchor, constant: margins).isActive = true
+        translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    func matchParentHeight(margins: CGFloat = 0) {
+        guard let parent = superview else { return }
+        topAnchor.constraint(equalTo: parent.topAnchor, constant: margins).isActive = true
+        parent.bottomAnchor.constraint(equalTo: bottomAnchor, constant: margins).isActive = true
+        translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    func matchParent(margins: CGFloat = 0) {
+        matchParentWidth(margins: margins)
+        matchParentHeight(margins: margins)
     }
 }
 
