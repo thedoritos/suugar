@@ -2,7 +2,7 @@ import UIKit
 import PlaygroundSupport
 
 class AppTableViewCell: UITableViewCell {
-    weak var nameLabel: UILabel!
+    weak var titleLabel: UILabel!
     weak var artistLabel: UILabel!
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -25,12 +25,13 @@ class AppTableViewCell: UITableViewCell {
                     $0.spacing = 8
 
                     $0.label {
+                        $0.size(width: 38)
                         $0.text = "Title:"
                         $0.textAlignment = .right
                         $0.font = UIFont.systemFont(ofSize: 12)
                         $0.setContentHuggingPriority(.defaultHigh, for: .horizontal)
                     }
-                    nameLabel = $0.label {
+                    titleLabel = $0.label {
                         $0.text = ""
                         $0.numberOfLines = 0
                         $0.textColor = UIColor.darkGray
@@ -42,6 +43,7 @@ class AppTableViewCell: UITableViewCell {
                     $0.spacing = 8
 
                     $0.label {
+                        $0.size(width: 38)
                         $0.text = "Artist:"
                         $0.textAlignment = .right
                         $0.font = UIFont.systemFont(ofSize: 12)
@@ -96,7 +98,7 @@ class SuugarViewController: UIViewController, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! AppTableViewCell
 
         let item = items[indexPath.row]
-        cell.nameLabel.text = item.title
+        cell.titleLabel.text = item.title
         cell.artistLabel.text = item.artist
 
         return cell
@@ -146,6 +148,21 @@ extension UIView {
 
         self.addSubview(view)
         return block(view)
+    }
+
+    func size(width: CGFloat) {
+        self.widthAnchor.constraint(equalToConstant: width).isActive = true
+        translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    func size(height: CGFloat) {
+        self.heightAnchor.constraint(equalToConstant: height).isActive = true
+        translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    func size(width: CGFloat, height: CGFloat) {
+        size(width: width)
+        size(height: height)
     }
 
     func matchParentWidth(margins: CGFloat = 0) {
