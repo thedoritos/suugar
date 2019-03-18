@@ -19,7 +19,8 @@ class AppTableViewCell: UITableViewCell {
     private func setUp() {
         ui {
             $0.stack {
-                $0.matchParent(margins: 8)
+                $0.matchParentWidth(margins: 12)
+                $0.matchParentHeight(margins: 8)
                 $0.spacing = 8
                 $0.alignment = .top
 
