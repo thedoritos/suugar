@@ -3,6 +3,7 @@ import PlaygroundSupport
 
 class AppTableViewCell: UITableViewCell {
     weak var nameLabel: UILabel!
+    weak var artistLabel: UILabel!
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -16,12 +17,44 @@ class AppTableViewCell: UITableViewCell {
 
     private func setUp() {
         ui {
-            nameLabel = $0.label {
+            $0.vstack {
                 $0.matchParent()
-                $0.text = ""
-                $0.numberOfLines = 0
-                $0.textColor = UIColor.darkGray
-                $0.font = UIFont.systemFont(ofSize: 17)
+                $0.spacing = 4
+
+                $0.stack {
+                    $0.spacing = 8
+
+                    $0.label {
+                        $0.text = "Title:"
+                        $0.textAlignment = .right
+                        $0.font = UIFont.systemFont(ofSize: 12)
+                        $0.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+                    }
+                    nameLabel = $0.label {
+                        $0.text = ""
+                        $0.numberOfLines = 0
+                        $0.textColor = UIColor.darkGray
+                        $0.font = UIFont.systemFont(ofSize: 17)
+                        $0.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+                    }
+                }
+                $0.stack {
+                    $0.spacing = 8
+
+                    $0.label {
+                        $0.text = "Artist:"
+                        $0.textAlignment = .right
+                        $0.font = UIFont.systemFont(ofSize: 12)
+                        $0.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+                    }
+                    artistLabel = $0.label {
+                        $0.text = ""
+                        $0.numberOfLines = 0
+                        $0.textColor = UIColor.darkGray
+                        $0.font = UIFont.systemFont(ofSize: 17)
+                        $0.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+                    }
+                }
             }
         }
     }
@@ -64,6 +97,7 @@ class SuugarViewController: UIViewController, UITableViewDataSource {
 
         let item = items[indexPath.row]
         cell.nameLabel.text = item.title
+        cell.artistLabel.text = item.artist
 
         return cell
     }
@@ -78,8 +112,7 @@ extension UIView {
     func label(block: (UILabel) -> Void) -> UILabel {
         let label = UILabel()
 
-        addSubview(label)
-        block(label)
+        addSubview(view: label, block: block)
         return label
     }
 
@@ -87,9 +120,32 @@ extension UIView {
     func table(block: (UITableView) -> Void) -> UITableView {
         let table = UITableView()
 
-        addSubview(table)
-        block(table)
+        addSubview(view: table, block: block)
         return table
+    }
+
+    @discardableResult
+    func stack(axis: NSLayoutConstraint.Axis = .horizontal, block: (UIStackView) -> Void) -> UIStackView {
+        let stack = UIStackView()
+        stack.axis = axis
+
+        addSubview(view: stack, block: block)
+        return stack
+    }
+
+    @discardableResult
+    func vstack(block: (UIStackView) -> Void) -> UIStackView {
+        return stack(axis: .vertical, block: block)
+    }
+
+    private func addSubview<T: UIView>(view: T, block: (T) -> Void) {
+        if let stackView = self as? UIStackView {
+            stackView.addArrangedSubview(view)
+            return block(view)
+        }
+
+        self.addSubview(view)
+        return block(view)
     }
 
     func matchParentWidth(margins: CGFloat = 0) {
