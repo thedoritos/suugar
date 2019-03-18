@@ -2,6 +2,29 @@ import UIKit
 import PlaygroundSupport
 
 class AppTableViewCell: UITableViewCell {
+    weak var nameLabel: UILabel!
+
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setUp()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setUp()
+    }
+
+    private func setUp() {
+        ui {
+            nameLabel = $0.label {
+                $0.matchParent()
+                $0.text = ""
+                $0.numberOfLines = 0
+                $0.textColor = UIColor.darkGray
+                $0.font = UIFont.systemFont(ofSize: 17)
+            }
+        }
+    }
 }
 
 class SuugarViewController: UIViewController, UITableViewDataSource {
@@ -38,6 +61,10 @@ class SuugarViewController: UIViewController, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! AppTableViewCell
+
+        let item = items[indexPath.row]
+        cell.nameLabel.text = item.title
+
         return cell
     }
 }
@@ -45,6 +72,15 @@ class SuugarViewController: UIViewController, UITableViewDataSource {
 extension UIView {
     func ui(block: (UIView) -> Void) {
         block(self)
+    }
+
+    @discardableResult
+    func label(block: (UILabel) -> Void) -> UILabel {
+        let label = UILabel()
+
+        addSubview(label)
+        block(label)
+        return label
     }
 
     @discardableResult
