@@ -5,6 +5,8 @@ class AppTableViewCell: UITableViewCell {
 }
 
 class SuugarViewController: UIViewController, UITableViewDataSource {
+    weak var table: UITableView!
+
     var items: [AppStoreItem] = []
 
     override func viewDidLoad() {
@@ -13,10 +15,18 @@ class SuugarViewController: UIViewController, UITableViewDataSource {
 
         ui {
             $0.backgroundColor = UIColor.white
-            $0.table {
+            table = $0.table {
                 $0.estimatedRowHeight = UITableView.automaticDimension
                 $0.register(AppTableViewCell.self, forCellReuseIdentifier: "cell")
                 $0.dataSource = self
+            }
+        }
+
+        let fetcher = AppStoreItemFetcher()
+        fetcher.fetch { [weak self] items in
+            DispatchQueue.main.async {
+                self?.items = items
+                self?.table.reloadData()
             }
         }
     }
