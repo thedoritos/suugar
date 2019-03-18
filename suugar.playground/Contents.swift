@@ -4,8 +4,23 @@ import PlaygroundSupport
 class SuugarViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.white
-        title = "Suugar"
+        title = "Top Grossing Applications"
+
+        ui {
+            $0.backgroundColor = UIColor.white
+        }
+    }
+}
+
+extension UIView {
+    func ui(block: (UIView) -> Void) {
+        block(self)
+    }
+}
+
+extension UIViewController {
+    func ui(block: (UIView) -> Void) {
+        self.view.ui(block: block)
     }
 }
 
