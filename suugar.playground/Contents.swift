@@ -4,6 +4,7 @@ import PlaygroundSupport
 class AppTableViewCell: UITableViewCell {
     weak var titleLabel: UILabel!
     weak var artistLabel: UILabel!
+    weak var iconImage: UIImageView!
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -17,44 +18,62 @@ class AppTableViewCell: UITableViewCell {
 
     private func setUp() {
         ui {
-            $0.vstack {
-                $0.matchParent()
-                $0.spacing = 4
+            $0.stack {
+                $0.matchParent(margins: 8)
+                $0.spacing = 8
+                $0.alignment = .top
 
-                $0.stack {
-                    $0.spacing = 8
+                $0.view {
+                    $0.layer.borderColor = UIColor.init(white: 0.81, alpha: 1).cgColor
+                    $0.layer.borderWidth = 1
+                    $0.layer.cornerRadius = 16
+                    $0.layer.masksToBounds = true
 
-                    $0.label {
-                        $0.size(width: 38)
-                        $0.text = "Title:"
-                        $0.textAlignment = .right
-                        $0.font = UIFont.systemFont(ofSize: 12)
-                        $0.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-                    }
-                    titleLabel = $0.label {
-                        $0.text = ""
-                        $0.numberOfLines = 0
-                        $0.textColor = UIColor.darkGray
-                        $0.font = UIFont.systemFont(ofSize: 17)
-                        $0.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+                    iconImage = $0.image {
+                        $0.matchParent()
+                        $0.size(width: 75, height: 75)
+                        $0.contentMode = .scaleAspectFit
+                        $0.backgroundColor = UIColor.init(white: 0.96, alpha: 1)
                     }
                 }
-                $0.stack {
-                    $0.spacing = 8
+                $0.vstack {
+                    $0.spacing = 4
 
-                    $0.label {
-                        $0.size(width: 38)
-                        $0.text = "Artist:"
-                        $0.textAlignment = .right
-                        $0.font = UIFont.systemFont(ofSize: 12)
-                        $0.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+                    $0.stack {
+                        $0.spacing = 8
+
+                        $0.label {
+                            $0.size(width: 38)
+                            $0.text = "Title:"
+                            $0.textAlignment = .right
+                            $0.font = UIFont.systemFont(ofSize: 12)
+                            $0.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+                        }
+                        titleLabel = $0.label {
+                            $0.text = ""
+                            $0.numberOfLines = 0
+                            $0.textColor = UIColor.darkGray
+                            $0.font = UIFont.systemFont(ofSize: 17)
+                            $0.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+                        }
                     }
-                    artistLabel = $0.label {
-                        $0.text = ""
-                        $0.numberOfLines = 0
-                        $0.textColor = UIColor.darkGray
-                        $0.font = UIFont.systemFont(ofSize: 17)
-                        $0.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+                    $0.stack {
+                        $0.spacing = 8
+
+                        $0.label {
+                            $0.size(width: 38)
+                            $0.text = "Artist:"
+                            $0.textAlignment = .right
+                            $0.font = UIFont.systemFont(ofSize: 12)
+                            $0.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+                        }
+                        artistLabel = $0.label {
+                            $0.text = ""
+                            $0.numberOfLines = 0
+                            $0.textColor = UIColor.darkGray
+                            $0.font = UIFont.systemFont(ofSize: 17)
+                            $0.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+                        }
                     }
                 }
             }
@@ -100,6 +119,7 @@ class SuugarViewController: UIViewController, UITableViewDataSource {
         let item = items[indexPath.row]
         cell.titleLabel.text = item.title
         cell.artistLabel.text = item.artist
+        cell.iconImage.image = UIImage(data: try! Data(contentsOf: item.iconImageURL))
 
         return cell
     }
@@ -111,11 +131,27 @@ extension UIView {
     }
 
     @discardableResult
+    func view(block: (UIView) -> Void) -> UIView {
+        let view = UIView()
+
+        addSubview(view: view, block: block)
+        return view
+    }
+
+    @discardableResult
     func label(block: (UILabel) -> Void) -> UILabel {
         let label = UILabel()
 
         addSubview(view: label, block: block)
         return label
+    }
+
+    @discardableResult
+    func image(block: (UIImageView) -> Void) -> UIImageView {
+        let image = UIImageView()
+
+        addSubview(view: image, block: block)
+        return image
     }
 
     @discardableResult
