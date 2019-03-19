@@ -2,8 +2,11 @@ import UIKit
 import PlaygroundSupport
 
 class AppTableViewCell: UITableViewCell {
-    weak var titleLabel: UILabel!
-    weak var artistLabel: UILabel!
+    weak var titleView: MetaTextView!
+    var titleLabel: UILabel { return titleView.valueLabel }
+
+    weak var artistView: MetaTextView!
+    var artistLabel: UILabel { return artistView.valueLabel }
 
     weak var appIconView: AppIconView!
     var iconImage: UIImageView { return appIconView.iconImage }
@@ -30,41 +33,11 @@ class AppTableViewCell: UITableViewCell {
                 $0.vstack {
                     $0.spacing = 4
 
-                    $0.stack {
-                        $0.spacing = 8
-
-                        $0.label {
-                            $0.size(width: 38)
-                            $0.text = "Title:"
-                            $0.textAlignment = .right
-                            $0.font = UIFont.systemFont(ofSize: 12)
-                            $0.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-                        }
-                        titleLabel = $0.label {
-                            $0.text = ""
-                            $0.numberOfLines = 0
-                            $0.textColor = UIColor.darkGray
-                            $0.font = UIFont.systemFont(ofSize: 17)
-                            $0.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
-                        }
+                    titleView = $0.composite {
+                        $0.metaLabel.text = "Title:"
                     }
-                    $0.stack {
-                        $0.spacing = 8
-
-                        $0.label {
-                            $0.size(width: 38)
-                            $0.text = "Artist:"
-                            $0.textAlignment = .right
-                            $0.font = UIFont.systemFont(ofSize: 12)
-                            $0.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-                        }
-                        artistLabel = $0.label {
-                            $0.text = ""
-                            $0.numberOfLines = 0
-                            $0.textColor = UIColor.darkGray
-                            $0.font = UIFont.systemFont(ofSize: 17)
-                            $0.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
-                        }
+                    artistView = $0.composite {
+                        $0.metaLabel.text = "Artist:"
                     }
                 }
             }
