@@ -14,6 +14,22 @@ extension UIView {
     }
 
     @discardableResult
+    public func composite<T: UIView>(block: (T) -> Void = { _ in }) -> T {
+        let view = T()
+
+        addSubview(view: view, block: block)
+        return view
+    }
+
+    @discardableResult
+    public func composite<T: UIView>(_ viewType: T.Type, block: (T) -> Void = { _ in }) -> T {
+        let view = T()
+
+        addSubview(view: view, block: block)
+        return view
+    }
+
+    @discardableResult
     public func label(block: (UILabel) -> Void) -> UILabel {
         let label = UILabel()
 
