@@ -39,3 +39,34 @@ ui {
     }
 }
 ```
+
+## Easily Reusable Views
+
+If you have custom views already using, you can easily integrate it into the hierarchy.
+
+```swift
+class HelloView: UIStackView {
+    // TODO: Override init methods to call render
+
+    private func render() {
+        ui {
+            $0.image {
+                $0.image = UIImage(named: "ic_hello")
+            }
+            $0.label {
+                $0.text = "Hello, Again!!"
+            }
+        }
+    }
+}
+```
+
+```swift
+ui {
+    // By specifying the type
+    $0.composite(HelloView.self)
+
+    // Or ask compiler to do it
+    let view: HelloView = $0.composite()
+}
+```
