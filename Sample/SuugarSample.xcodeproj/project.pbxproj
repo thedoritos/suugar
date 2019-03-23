@@ -12,6 +12,7 @@
 		76BEC33B22468911007D2711 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76BEC33922468911007D2711 /* Main.storyboard */; };
 		76BEC33D22468912007D2711 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76BEC33C22468912007D2711 /* Assets.xcassets */; };
 		76BEC34022468912007D2711 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76BEC33E22468912007D2711 /* LaunchScreen.storyboard */; };
+		76BEC34C22468E5F007D2711 /* Suugar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76BEC34A22468A9C007D2711 /* Suugar.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		76BEC33C22468912007D2711 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		76BEC33F22468912007D2711 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		76BEC34122468912007D2711 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		76BEC34A22468A9C007D2711 /* Suugar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Suugar.framework; path = ../Carthage/Build/iOS/Suugar.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +31,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76BEC34C22468E5F007D2711 /* Suugar.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +43,7 @@
 			children = (
 				76BEC33422468911007D2711 /* SuugarSample */,
 				76BEC33322468911007D2711 /* Products */,
+				76BEC34922468A9C007D2711 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,6 +68,14 @@
 			path = SuugarSample;
 			sourceTree = "<group>";
 		};
+		76BEC34922468A9C007D2711 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				76BEC34A22468A9C007D2711 /* Suugar.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -71,6 +83,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 76BEC34422468912007D2711 /* Build configuration list for PBXNativeTarget "SuugarSample" */;
 			buildPhases = (
+				76BEC34822468A25007D2711 /* [Carthage] Copy Frameworks */,
 				76BEC32E22468911007D2711 /* Sources */,
 				76BEC32F22468911007D2711 /* Frameworks */,
 				76BEC33022468911007D2711 /* Resources */,
@@ -128,6 +141,29 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		76BEC34822468A25007D2711 /* [Carthage] Copy Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/../Carthage/Build/iOS/Suugar.framework",
+			);
+			name = "[Carthage] Copy Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Suugar.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		76BEC32E22468911007D2711 /* Sources */ = {
@@ -283,6 +319,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P5WMZCU6DH;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../Carthage/Build/iOS/";
 				INFOPLIST_FILE = SuugarSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -301,6 +338,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P5WMZCU6DH;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../Carthage/Build/iOS/";
 				INFOPLIST_FILE = SuugarSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
