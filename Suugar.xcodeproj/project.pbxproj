@@ -8,12 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		76BEC2EF22468012007D2711 /* Suugar.h in Headers */ = {isa = PBXBuildFile; fileRef = 76BEC2ED22468012007D2711 /* Suugar.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		76BEC31022468628007D2711 /* UIView+Suugar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BEC30F22468628007D2711 /* UIView+Suugar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		76BEC2EA22468012007D2711 /* Suugar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Suugar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		76BEC2ED22468012007D2711 /* Suugar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Suugar.h; sourceTree = "<group>"; };
 		76BEC2EE22468012007D2711 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		76BEC30F22468628007D2711 /* UIView+Suugar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Suugar.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +48,7 @@
 		76BEC2EC22468012007D2711 /* Suugar */ = {
 			isa = PBXGroup;
 			children = (
+				76BEC30F22468628007D2711 /* UIView+Suugar.swift */,
 				76BEC2ED22468012007D2711 /* Suugar.h */,
 				76BEC2EE22468012007D2711 /* Info.plist */,
 			);
@@ -94,6 +97,7 @@
 				TargetAttributes = {
 					76BEC2E922468012007D2711 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1010;
 					};
 				};
 			};
@@ -129,6 +133,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76BEC31022468628007D2711 /* UIView+Suugar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +265,7 @@
 		76BEC2F322468012007D2711 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -277,6 +283,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.kakeragames.Suugar;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -285,6 +292,7 @@
 		76BEC2F422468012007D2711 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
