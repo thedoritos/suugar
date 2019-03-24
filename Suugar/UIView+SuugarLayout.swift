@@ -5,7 +5,36 @@
 //  Created by thedoritos on 2019/03/24.
 //
 
+public enum SuugarSize {
+    case absolute(size: CGFloat)
+    case matchParent(margins: CGFloat)
+}
+
 public extension UIView {
+    func width(_ size: SuugarSize) {
+        switch size {
+        case .absolute(let size):
+            self.widthAnchor.constraint(equalToConstant: size).isActive = true
+        case .matchParent(let margins):
+            guard let parent = superview else { return }
+            leadingAnchor.constraint(equalTo: parent.leadingAnchor, constant: margins).isActive = true
+            parent.trailingAnchor.constraint(equalTo: trailingAnchor, constant: margins).isActive = true
+        }
+        translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    func height(_ size: SuugarSize) {
+        switch size {
+        case .absolute(let size):
+            self.heightAnchor.constraint(equalToConstant: size).isActive = true
+        case .matchParent(let margins):
+            guard let parent = superview else { return }
+            topAnchor.constraint(equalTo: parent.topAnchor, constant: margins).isActive = true
+            parent.bottomAnchor.constraint(equalTo: bottomAnchor, constant: margins).isActive = true
+        }
+        translatesAutoresizingMaskIntoConstraints = false
+    }
+
     func size(width: CGFloat) {
         self.widthAnchor.constraint(equalToConstant: width).isActive = true
         translatesAutoresizingMaskIntoConstraints = false
