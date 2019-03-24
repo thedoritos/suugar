@@ -21,22 +21,44 @@ public extension UIView {
         size(height: height)
     }
 
-    func matchParentWidth(margins: CGFloat = 0) {
+    func matchParent(axis: NSLayoutConstraint.Axis, margins: CGFloat = 0) {
         guard let parent = superview else { return }
-        leadingAnchor.constraint(equalTo: parent.leadingAnchor, constant: margins).isActive = true
-        parent.trailingAnchor.constraint(equalTo: trailingAnchor, constant: margins).isActive = true
+        switch axis {
+        case .horizontal:
+            leadingAnchor.constraint(equalTo: parent.leadingAnchor, constant: margins).isActive = true
+            parent.trailingAnchor.constraint(equalTo: trailingAnchor, constant: margins).isActive = true
+        case .vertical:
+            topAnchor.constraint(equalTo: parent.topAnchor, constant: margins).isActive = true
+            parent.bottomAnchor.constraint(equalTo: bottomAnchor, constant: margins).isActive = true
+        }
         translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    func matchParentWidth(margins: CGFloat = 0) {
+        matchParent(axis: .horizontal, margins: margins)
     }
 
     func matchParentHeight(margins: CGFloat = 0) {
-        guard let parent = superview else { return }
-        topAnchor.constraint(equalTo: parent.topAnchor, constant: margins).isActive = true
-        parent.bottomAnchor.constraint(equalTo: bottomAnchor, constant: margins).isActive = true
-        translatesAutoresizingMaskIntoConstraints = false
+        matchParent(axis: .vertical, margins: margins)
     }
 
     func matchParent(margins: CGFloat = 0) {
-        matchParentWidth(margins: margins)
-        matchParentHeight(margins: margins)
+        matchParent(axis: .horizontal, margins: margins)
+        matchParent(axis: .vertical, margins: margins)
+    }
+
+    func center(axis: NSLayoutConstraint.Axis) {
+        guard let parent = superview else { return }
+        switch axis {
+        case .horizontal:
+            self.centerXAnchor.constraint(equalTo: parent.centerXAnchor).isActive = true
+        case .vertical:
+            self.centerYAnchor.constraint(equalTo: parent.centerYAnchor).isActive = true
+        }
+    }
+
+    func center() {
+        center(axis: .horizontal)
+        center(axis: .vertical)
     }
 }
