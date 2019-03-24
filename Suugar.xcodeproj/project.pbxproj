@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		76BEC2EF22468012007D2711 /* Suugar.h in Headers */ = {isa = PBXBuildFile; fileRef = 76BEC2ED22468012007D2711 /* Suugar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		76BEC31022468628007D2711 /* UIView+Suugar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BEC30F22468628007D2711 /* UIView+Suugar.swift */; };
+		76BEC35022473089007D2711 /* UIView+SuugarLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BEC34F22473089007D2711 /* UIView+SuugarLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -16,6 +17,7 @@
 		76BEC2ED22468012007D2711 /* Suugar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Suugar.h; sourceTree = "<group>"; };
 		76BEC2EE22468012007D2711 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		76BEC30F22468628007D2711 /* UIView+Suugar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Suugar.swift"; sourceTree = "<group>"; };
+		76BEC34F22473089007D2711 /* UIView+SuugarLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+SuugarLayout.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +51,7 @@
 			isa = PBXGroup;
 			children = (
 				76BEC30F22468628007D2711 /* UIView+Suugar.swift */,
+				76BEC34F22473089007D2711 /* UIView+SuugarLayout.swift */,
 				76BEC2ED22468012007D2711 /* Suugar.h */,
 				76BEC2EE22468012007D2711 /* Info.plist */,
 			);
@@ -134,6 +137,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				76BEC31022468628007D2711 /* UIView+Suugar.swift in Sources */,
+				76BEC35022473089007D2711 /* UIView+SuugarLayout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
