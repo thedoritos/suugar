@@ -14,7 +14,9 @@ class ViewController: UIViewController {
 
         ui {
             $0.label {
-                $0.frame = CGRect(x: 0, y: 320, width: 375, height: 30)
+                $0.center()
+                $0.size(width: 200)
+
                 $0.text = "Hello, World!"
                 $0.textAlignment = .center
             }
