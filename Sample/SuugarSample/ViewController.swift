@@ -14,7 +14,7 @@ class ViewController: UIViewController {
 
         ui {
             $0.label {
-                $0.center()
+                $0.alignCenter()
                 $0.size(width: 200)
 
                 $0.text = "Hello, World!"
