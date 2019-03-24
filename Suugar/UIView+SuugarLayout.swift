@@ -76,7 +76,7 @@ public extension UIView {
         matchParent(axis: .vertical, margins: margins)
     }
 
-    func center(axis: NSLayoutConstraint.Axis) {
+    func alignCenter(axis: NSLayoutConstraint.Axis) {
         guard let parent = superview else { return }
         switch axis {
         case .horizontal:
@@ -86,8 +86,8 @@ public extension UIView {
         }
     }
 
-    func center() {
-        center(axis: .horizontal)
-        center(axis: .vertical)
+    func alignCenter() {
+        alignCenter(axis: .horizontal)
+        alignCenter(axis: .vertical)
     }
 }
