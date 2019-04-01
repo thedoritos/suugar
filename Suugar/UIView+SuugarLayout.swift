@@ -50,17 +50,56 @@ public extension UIView {
         size(height: height)
     }
 
-    func matchParent(axis: NSLayoutConstraint.Axis, margins: CGFloat = 0) {
+    private func matchParent(axis: NSLayoutConstraint.Axis, margins: CGFloat = 0, safely: Bool = false) {
         guard let parent = superview else { return }
+
+        let insets: UIEdgeInsets = {
+            guard #available(iOS 11.0, *) else { return .zero }
+            return safely ? parent.safeAreaInsets : .zero
+        }()
+
         switch axis {
         case .horizontal:
-            leadingAnchor.constraint(equalTo: parent.leadingAnchor, constant: margins).isActive = true
-            parent.trailingAnchor.constraint(equalTo: trailingAnchor, constant: margins).isActive = true
+            let constraintId1 = "parent_left"
+            removeConstraint(constraintId1)
+            let constraint1 = leftAnchor.constraint(equalTo: parent.leftAnchor, constant: margins + insets.left)
+            constraint1.identifier = constraintId1
+            constraint1.isActive = true
+
+            let constraintId2 = "parent_right"
+            removeConstraint(constraintId2)
+            let constraint2 = parent.rightAnchor.constraint(equalTo: rightAnchor, constant: margins + insets.right)
+            constraint2.identifier = constraintId2
+            constraint2.isActive = true
         case .vertical:
-            topAnchor.constraint(equalTo: parent.topAnchor, constant: margins).isActive = true
-            parent.bottomAnchor.constraint(equalTo: bottomAnchor, constant: margins).isActive = true
+            let constraintId1 = "parent_top"
+            removeConstraint(constraintId1)
+            let constraint1 = topAnchor.constraint(equalTo: parent.topAnchor, constant: margins + insets.top)
+            constraint1.identifier = constraintId1
+            constraint1.isActive = true
+
+            let constraintId2 = "parent_bottom"
+            removeConstraint(constraintId2)
+            let constraint2 = parent.bottomAnchor.constraint(equalTo: bottomAnchor, constant: margins + insets.bottom)
+            constraint2.identifier = constraintId2
+            constraint2.isActive = true
         }
+
         translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    func matchParent(axis: NSLayoutConstraint.Axis, margins: CGFloat = 0) {
+        matchParent(axis: axis, margins: margins, safely: false)
+//        guard let parent = superview else { return }
+//        switch axis {
+//        case .horizontal:
+//            leadingAnchor.constraint(equalTo: parent.leadingAnchor, constant: margins).isActive = true
+//            parent.trailingAnchor.constraint(equalTo: trailingAnchor, constant: margins).isActive = true
+//        case .vertical:
+//            topAnchor.constraint(equalTo: parent.topAnchor, constant: margins).isActive = true
+//            parent.bottomAnchor.constraint(equalTo: bottomAnchor, constant: margins).isActive = true
+//        }
+//        translatesAutoresizingMaskIntoConstraints = false
     }
 
     func matchParentWidth(margins: CGFloat = 0) {
@@ -90,4 +129,19 @@ public extension UIView {
         alignCenter(axis: .horizontal)
         alignCenter(axis: .vertical)
     }
+
+    func freeFrame() {
+        translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    private func removeConstraint(_ identifier: String) {
+        removeConstraints(constraints.filter({ $0.identifier == identifier }))
+    }
+//
+//    func trailing(margin: CGFloat = 0, safe: Bool = false) {
+//        guard let parent = superview else { return }
+//        let anchor = safe ? parent.safeAreaLayoutGuide.trailingAnchor : parent.trailingAnchor
+//        self.trailingAnchor.constraint(equalTo: anchor, constant: -margin).isActive = true
+//        translatesAutoresizingMaskIntoConstraints = false
+//    }
 }

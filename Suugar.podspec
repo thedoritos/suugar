@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = "Suugar"
-  spec.version      = "0.1.0"
+  spec.version      = "0.1.1"
   spec.summary      = "Build UI for iOS application by code"
 
   spec.license      = "MIT"
