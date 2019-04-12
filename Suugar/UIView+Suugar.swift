@@ -6,7 +6,21 @@
 //
 
 public typealias SuugarBlock<T: UIView> = (T) -> Void
+public typealias SuugarFunc<T: UIView, U> = (T) -> U
 public typealias SuugarFactory<T: UIView> = () -> T
+
+public extension UIAppearance {
+    @discardableResult
+    func apply(_ block: (Self) -> Void) -> Self {
+        block(self)
+        return self
+    }
+
+    @discardableResult
+    func apply<T>(_ map: (Self) -> T) -> T {
+        return map(self)
+    }
+}
 
 public extension UIViewController {
     func ui(_ block: SuugarBlock<UIView>) {
