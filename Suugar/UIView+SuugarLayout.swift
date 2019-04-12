@@ -90,4 +90,8 @@ public extension UIView {
         alignCenter(axis: .horizontal)
         alignCenter(axis: .vertical)
     }
+
+    func freeFrame() {
+        translatesAutoresizingMaskIntoConstraints = false
+    }
 }
