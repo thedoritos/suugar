@@ -27,7 +27,13 @@ public extension UIView {
 public extension UIView {
     private func addSubview<T: UIView>(factory: SuugarFactory<T>, block: SuugarBlock<T>) -> T {
         let view = factory()
-        addSubview(view)
+
+        if let stackView = self as? UIStackView {
+            stackView.addArrangedSubview(view)
+        } else {
+            addSubview(view)
+        }
+
         block(view)
         return view
     }
@@ -49,6 +55,39 @@ public extension UIView {
     @discardableResult
     func button(block: SuugarBlock<UIButton> = { _ in }) -> UIButton {
         return addSubview(block: block)
+    }
+
+    @discardableResult
+    public func stack(axis: NSLayoutConstraint.Axis = .horizontal, block: (UIStackView) -> Void) -> UIStackView {
+        let factory: SuugarFactory<UIStackView> = {
+            let view = UIStackView()
+            view.axis = axis
+            return view
+        }
+        return addSubview(factory: factory, block: block)
+    }
+
+    @discardableResult
+    public func vstack(block: (UIStackView) -> Void) -> UIStackView {
+        return stack(axis: .vertical, block: block)
+    }
+
+    @discardableResult
+    func scrollView(block: SuugarBlock<UIScrollView> = { _ in }) -> UIScrollView {
+        return addSubview(block: block)
+    }
+
+    @discardableResult
+    func table(block: SuugarBlock<UITableView> = { _ in }) -> UITableView {
+        return addSubview(block: block)
+    }
+
+    @discardableResult
+    func collection(block: SuugarBlock<UICollectionView> = { _ in }) -> UICollectionView {
+        let factory: SuugarFactory<UICollectionView> = {
+            return UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
+        }
+        return addSubview(factory: factory, block: block)
     }
 
     @discardableResult
