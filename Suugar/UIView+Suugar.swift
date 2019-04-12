@@ -6,6 +6,7 @@
 //
 
 public typealias SuugarBlock<T: UIView> = (T) -> Void
+public typealias SuugarFunc<T: UIView, U> = (T) -> U
 public typealias SuugarFactory<T: UIView> = () -> T
 
 public extension UIAppearance {
