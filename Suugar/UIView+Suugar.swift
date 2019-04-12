@@ -73,6 +73,24 @@ public extension UIView {
     }
 
     @discardableResult
+    func scrollView(block: SuugarBlock<UIScrollView> = { _ in }) -> UIScrollView {
+        return addSubview(block: block)
+    }
+
+    @discardableResult
+    func table(block: SuugarBlock<UITableView> = { _ in }) -> UITableView {
+        return addSubview(block: block)
+    }
+
+    @discardableResult
+    func collection(block: SuugarBlock<UICollectionView> = { _ in }) -> UICollectionView {
+        let factory: SuugarFactory<UICollectionView> = {
+            return UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
+        }
+        return addSubview(factory: factory, block: block)
+    }
+
+    @discardableResult
     func composite<T: UIView>(block: SuugarBlock<T> = { _ in }) -> T {
         return addSubview(block: block)
     }
