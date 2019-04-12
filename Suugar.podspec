@@ -11,6 +11,7 @@ Pod::Spec.new do |spec|
   spec.social_media_url   = "https://twitter.com/thedoritos"
 
   spec.platform     = :ios, "9.0"
+  spec.swift_version = "4.0"
 
   spec.source       = { :git => "https://github.com/thedoritos/suugar.git", :tag => "#{spec.version}" }
 
