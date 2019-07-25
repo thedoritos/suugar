@@ -5,6 +5,8 @@
 //  Created by thedoritos on 2019/03/24.
 //
 
+import UIKit
+
 public enum SuugarSize {
     case absolute(size: CGFloat)
     case matchParent(margins: CGFloat)
