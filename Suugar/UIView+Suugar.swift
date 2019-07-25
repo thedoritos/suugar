@@ -5,6 +5,8 @@
 //  Created by thedoritos on 2019/03/24.
 //
 
+i port UIKit
+
 public typealias SuugarBlock<T: UIView> = (T) -> Void
 public typealias SuugarFunc<T: UIView, U> = (T) -> U
 public typealias SuugarFactory<T: UIView> = () -> T
